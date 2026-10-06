@@ -1,0 +1,179 @@
+/* Flat Earth website. The textures (--tex-*) are painted at load time by js/book-styles.js with the
+   book's crayon engine; this file only arranges them. Colors match the printed interior pages. */
+@font-face { font-family: 'Architect'; src: url('../fonts/ArchitectsDaughter.ttf') format('truetype'); font-display: block; }
+
+:root {
+  --paper: #f3ecdb;
+  --ink: #1d1b1e;
+  --ink-soft: rgba(29, 27, 30, 0.75);
+  --water: #b8d6ea;
+  --orange: #e8491d;
+  --gap: 28px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper) var(--tex-paper, none) repeat;
+  background-size: 700px 700px;
+  color: var(--ink);
+  font-family: 'Architect', 'Comic Sans MS', cursive;
+  font-size: 17px;
+  line-height: 1.45;
+  min-height: 100vh;
+  padding: 0 16px;
+}
+
+/* ---------- masthead: the running head from the book ---------- */
+.masthead {
+  display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  max-width: 1500px; margin: 0 auto; padding: 22px 8px 12px;
+  background: var(--tex-underline) bottom / 100% 12px no-repeat;
+}
+.brand { font-size: 30px; letter-spacing: 0.08em; color: var(--ink); text-decoration: none; }
+.brand-sub { font-size: 16px; color: var(--ink-soft); }
+.topnav { display: flex; gap: 18px; margin-left: 18px; font-size: 20px; }
+.topnav a { color: var(--ink); text-decoration: none; padding: 0 6px; }
+.topnav a:hover, .topnav a:focus-visible { background: var(--tex-blue-soft) center / 100% 100% no-repeat; outline: none; }
+.topnav a[aria-current="page"] { background: var(--tex-underline) bottom / 100% 8px no-repeat; }
+@media (pointer: coarse), (max-width: 600px) { .topnav a { padding: 8px 8px; } } /* (taller tap targets on phones) */
+.running-head { margin-left: auto; font-size: 13px; letter-spacing: 0.06em; color: var(--ink-soft); }
+
+/* ---------- layout ---------- */
+.layout {
+  display: grid; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); gap: var(--gap);
+  max-width: 1500px; margin: 24px auto; align-items: start;
+}
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .map-panel { order: -1; }
+  .running-head { display: none; }
+}
+
+/* ---------- hand-drawn panels (9-slice crayon frame) ---------- */
+.panel {
+  border: 24px solid transparent;
+  border-image: var(--tex-frame) 48 / 24px stretch;
+  background: rgba(243, 236, 219, 0.55);
+  background-clip: padding-box;
+}
+.controls { padding: 6px 8px 10px; }
+
+.title { font-size: 44px; font-weight: normal; margin: 0 0 4px; letter-spacing: 0.02em;
+  display: inline-block; padding-bottom: 6px; background: var(--tex-underline) bottom / 100% 12px no-repeat; }
+.proj-tag {
+  display: inline-block; margin: 10px 0 6px; padding: 2px 10px 0; font-size: 19px; letter-spacing: 0.1em;
+  background: var(--tex-blue) center / 100% 100% no-repeat;
+}
+.subtitle { margin: 4px 0 8px; font-size: 16px; letter-spacing: 0.04em; }
+.prose { margin: 0 0 18px; font-size: 15px; color: var(--ink-soft); }
+.prose strong { font-weight: normal; color: var(--ink); }
+.legend, .hint { font-size: 14px; color: var(--ink-soft); margin: 10px 0 0; }
+
+.field { margin: 18px 0 8px; }
+.label { display: block; font-size: 15px; letter-spacing: 0.08em; margin-bottom: 6px; }
+
+/* ---------- search ---------- */
+.search { position: relative; }
+.search input {
+  width: 100%; font: inherit; font-size: 17px; color: var(--ink);
+  background: transparent var(--tex-underline) bottom / 100% 12px no-repeat;
+  border: 0; padding: 6px 2px 10px; outline: none;
+}
+.search input::placeholder { color: rgba(29, 27, 30, 0.45); }
+.search input:focus { background: var(--tex-blue-soft) center / 100% 100% no-repeat, var(--tex-underline) bottom / 100% 12px no-repeat; }
+.results {
+  position: absolute; z-index: 20; left: -14px; right: -14px; top: 100%; margin: 4px 0 0; padding: 4px 6px; list-style: none;
+  border: 24px solid transparent; border-image: var(--tex-frame-b) 48 / 24px stretch;
+  background: var(--paper) var(--tex-paper) repeat; background-size: 700px; background-clip: padding-box;
+  box-shadow: 0 10px 24px rgba(29, 27, 30, 0.12);
+}
+.results li { padding: 6px 8px; cursor: pointer; display: flex; flex-direction: column; border-radius: 4px; }
+.results li.active, .results li:hover { background: var(--tex-blue-soft) center / 100% 100% no-repeat; }
+.results li.note { cursor: default; color: var(--ink-soft); background: none; }
+.r-name { font-size: 17px; }
+.r-detail { font-size: 13px; color: var(--ink-soft); }
+
+/* ---------- map type dropdown ---------- */
+.map-type-field { margin: 0 0 14px; }
+.map-type-field + .title { margin-top: 10px; }
+.scale-note { margin: -8px 0 16px; font-style: normal; }
+.select-wrap { position: relative; }
+.select-wrap select {
+  appearance: none; -webkit-appearance: none; width: 100%;
+  font: inherit; font-size: 17px; color: var(--ink); cursor: pointer;
+  background: transparent; border: 12px solid transparent; border-image: var(--tex-button) 20 / 12px stretch;
+  padding: 0 34px 0 4px;
+}
+.select-wrap select:hover, .select-wrap select:focus-visible { background: var(--tex-blue-soft) center / 100% 100% no-repeat; background-clip: padding-box; outline: none; }
+.select-wrap::after { /* hand-drawn chevron */
+  content: ''; position: absolute; right: 16px; top: 50%; width: 18px; height: 12px; transform: translateY(-50%);
+  background: var(--tex-chevron) center / contain no-repeat; pointer-events: none;
+}
+.select-wrap option, .select-wrap optgroup { font-family: 'Architect', cursive; }
+
+/* ---------- buttons ---------- */
+.btn {
+  font: inherit; color: var(--ink); cursor: pointer; background: transparent;
+  border: 10px solid transparent; border-image: var(--tex-button) 20 / 10px stretch;
+  padding: 0 8px; margin-top: 10px;
+}
+.btn.small { font-size: 14px; }
+.btn:hover, .btn:focus-visible { background: var(--tex-blue-soft) center / 100% 100% no-repeat; outline: none; background-clip: padding-box; }
+.btn.ghost { opacity: 0.8; }
+
+/* ---------- list of places ---------- */
+.place-list { list-style: none; padding: 0; margin: 10px 0 0; }
+.place-list li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0 10px; background: var(--tex-underline) bottom / 100% 8px no-repeat; }
+.place-list li:hover { background: var(--tex-blue-soft) center / 100% 100% no-repeat, var(--tex-underline) bottom / 100% 8px no-repeat; }
+.p-dot { flex: none; width: 20px; height: 20px; margin-top: 3px; background: var(--tex-dot) center / contain no-repeat; }
+.p-body { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.p-name { font-size: 16px; overflow-wrap: anywhere; }
+.p-meta { font-size: 13px; color: var(--ink-soft); }
+.p-center, .p-remove { font: inherit; background: none; border: 0; color: var(--ink-soft); cursor: pointer; padding: 2px 4px; }
+.p-center { font-size: 13px; text-decoration: underline dotted; }
+.p-remove { font-size: 22px; line-height: 1; }
+.p-center:hover, .p-remove:hover { color: var(--orange); }
+
+/* ---------- the map ---------- */
+.map-panel { position: sticky; top: 16px; }
+/* --aspect (width / height) is set by the map: 1 for most scales, wider for the two hemispheres */
+.map-frame { --aspect: 1; position: relative; width: 100%; max-width: calc((100vh - 120px) * var(--aspect)); min-width: 280px; margin: 0 auto; aspect-ratio: var(--aspect); cursor: crosshair; }
+.map-frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+@media (max-width: 900px) { .map-panel { position: static; } .map-frame { max-width: 100%; } }
+.map-status {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-2deg); margin: 0;
+  padding: 8px 22px; font-size: 22px; background: var(--tex-blue) center / 100% 100% no-repeat; pointer-events: none;
+}
+.map-status[hidden] { display: none; }
+
+.popover { position: absolute; z-index: 10; width: min(250px, 100%); padding: 2px 6px 4px; cursor: default; background-color: var(--paper); }
+.popover[hidden] { display: none; }
+.pop-close { position: absolute; right: -10px; top: -14px; font: inherit; font-size: 22px; background: none; border: 0; cursor: pointer; color: var(--ink-soft); }
+.pop-name { margin: 0 14px 2px 0; font-size: 17px; }
+.pop-meta { margin: 0; font-size: 13px; color: var(--ink-soft); }
+.pop-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.colophon { max-width: 1500px; margin: 10px auto 30px; padding: 12px 8px 0; font-size: 13px; color: var(--ink-soft);
+  background: var(--tex-underline) top / 100% 10px no-repeat; }
+
+.toggle { display: flex; align-items: center; gap: 8px; margin: 14px 0 8px; font-size: 16px; cursor: pointer; }
+.toggle input { width: 18px; height: 18px; accent-color: #2c4a7a; cursor: pointer; }
+
+/* ---------- small pages (404, the old activities link) ---------- */
+.simple-page { max-width: 640px; margin: 48px auto; padding: 8px 14px 16px; }
+.simple-page h1 { font-size: 34px; margin: 0 0 8px; font-weight: normal; letter-spacing: 0.04em; }
+.simple-page p { margin: 0 0 12px; }
+.simple-page .links { display: flex; gap: 12px; flex-wrap: wrap; }
+.simple-page .links a.btn { text-decoration: none; display: inline-block; padding: 4px 10px; min-height: 44px; line-height: 36px; }
+
+/* ---------- the four truths: badge row and blurb (the book's plate, beside the map) ---------- */
+.truths { margin: 4px 0 12px; }
+.badges { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; max-width: 320px; }
+.badge { display: flex; flex-direction: column; align-items: center; gap: 0; cursor: help; }
+.badge img { width: 64px; height: 64px; display: block; }
+.badge-name { font-size: 12px; letter-spacing: 0.06em; }
+.badge-legend { font-size: 12px; color: var(--ink-soft); margin: 4px 0 6px; }
+.blurb { margin: 0 0 6px; font-size: 16px; }
+@media (max-width: 600px) { .title { font-size: 34px; } }
+@media (max-width: 380px) { .badge img { width: 52px; height: 52px; } .badge-name { font-size: 11px; } }
+.field[hidden] { display: none; }

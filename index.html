@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flat Earth: Maps</title>
+  <meta name="description" content="Hand-drawn maps of the round world. Pick a map, put any place on it, and see what each map keeps true.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/site.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./">FLAT EARTH</a>
+    <span class="brand-sub">a book of maps just for me</span>
+    <nav class="topnav" aria-label="Main">
+      <a href="./" aria-current="page">Maps</a>
+      <a href="downloads/">Downloads</a>
+    </nav>
+    <span class="running-head">FLAT EARTH &nbsp;/&nbsp; DISTANCE MAPS</span>
+  </header>
+
+  <main class="layout">
+    <aside class="panel controls">
+      <div class="field map-type-field">
+        <label for="map-type" class="label">MAP TYPE</label>
+        <div class="select-wrap"><select id="map-type"></select></div>
+      </div>
+      <div class="field map-type-field">
+        <label for="map-scale" class="label">SCALE</label>
+        <div class="select-wrap"><select id="map-scale"></select></div>
+      </div>
+      <h1 class="title" id="title">THE WORLD</h1>
+      <p class="proj-tag">AZIMUTHAL EQUIDISTANT PROJECTION</p>
+      <section class="truths" aria-label="What this map keeps true">
+        <ul class="badges" id="badges"></ul>
+        <p class="badge-legend" id="badge-legend">Green: true everywhere. Half green: true only in places. Red: lost.</p>
+        <p class="blurb" id="blurb"></p>
+      </section>
+      <p class="subtitle" id="subtitle">DISTANCES FROM STATE COLLEGE, PA</p>
+      <p class="prose" id="prose"></p>
+      <p class="hint scale-note" id="scale-note" hidden></p>
+
+      <section class="field">
+        <label for="origin-search" class="label" id="origin-label">CENTER OF THE MAP</label>
+        <div class="search">
+          <input id="origin-search" type="search" autocomplete="off" placeholder="Search for any place…"
+            role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="origin-results">
+          <ul id="origin-results" class="results" role="listbox" hidden></ul>
+        </div>
+        <button id="home-btn" class="btn small" type="button">Back to State College</button>
+      </section>
+
+      <section class="field">
+        <label for="place-search" class="label">PLACES ON THE MAP</label>
+        <div class="search">
+          <input id="place-search" type="search" autocomplete="off" placeholder="Add a city, landmark, anywhere…"
+            role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="place-results">
+          <ul id="place-results" class="results" role="listbox" hidden></ul>
+        </div>
+        <p id="places-empty" class="hint">No places yet. Search above, or click anywhere on the map.</p>
+        <ul id="place-list" class="place-list"></ul>
+        <button id="clear-btn" class="btn small ghost" type="button">Clear places</button>
+      </section>
+
+      <label class="toggle"><input id="labels-toggle" type="checkbox" checked> Show labels</label>
+
+      <p class="legend" id="legend">Rings every 2,500 miles; faint rings every 500. Headings are degrees clockwise from north.</p>
+    </aside>
+
+    <section class="map-panel" aria-label="Map">
+      <div class="map-frame">
+        <canvas id="map-base" role="img" aria-label="Azimuthal equidistant map"></canvas>
+        <canvas id="map-places" aria-hidden="true"></canvas>
+        <p id="map-status" class="map-status">Drawing the map…</p>
+        <div id="popover" class="popover panel" hidden>
+          <button id="pop-close" class="pop-close" type="button" aria-label="Close">&times;</button>
+          <p id="pop-name" class="pop-name"></p>
+          <p id="pop-meta" class="pop-meta"></p>
+          <div class="pop-actions">
+            <button id="pop-add" class="btn small" type="button">Add to map</button>
+            <button id="pop-center" class="btn small" type="button">Center here</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="colophon">Drawn in crayon by code, same as the book. Map data: Natural Earth. Place search: OpenStreetMap via Photon.</footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flat Earth: Page not found</title>
+  <meta name="robots" content="noindex">
+  <style>
+    /* (enough to look right even before the site's stylesheet loads) */
+    body { margin: 0; padding: 0 16px; background: #f3ecdb; color: #1d1b1e; font-family: 'Architect', 'Comic Sans MS', cursive; }
+  </style>
+  <script>
+    // GitHub Pages shows this page for a missing address at any depth, so links relative to this file would break
+    // on deeper misses. Find the site's own folder from the address instead: on <user>.github.io it is the first
+    // folder (the repository's name); anywhere else it is /flat-earth/ when the address starts with that, or the top.
+    (function () {
+      var seg = location.pathname.split('/').filter(Boolean);
+      var root = seg.length && (/\.github\.io$/.test(location.hostname) || seg[0] === 'flat-earth') ? '/' + seg[0] + '/' : '/';
+      window.FE_ROOT = root;
+      document.write('<link rel="icon" href="' + root + 'favicon.svg" type="image/svg+xml">');
+      document.write('<link rel="stylesheet" href="' + root + 'css/site.css">');
+    })();
+  </script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" data-to="" href="./">FLAT EARTH</a>
+    <span class="brand-sub">a book of maps just for me</span>
+    <nav class="topnav" aria-label="Main">
+      <a data-to="" href="./">Maps</a>
+      <a data-to="downloads/" href="downloads/">Downloads</a>
+    </nav>
+  </header>
+  <main class="simple-page panel">
+    <h1>THIS PAGE IS OFF THE MAP</h1>
+    <p>There is nothing at this address. It may have moved, or the link may have a typo.</p>
+    <p>Try one of these instead:</p>
+    <div class="links">
+      <a class="btn" data-to="" href="./">Make a map</a>
+      <a class="btn" data-to="downloads/" href="downloads/">Downloads</a>
+    </div>
+  </main>
+  <script>
+    for (var a of document.querySelectorAll('a[data-to]')) a.href = window.FE_ROOT + a.getAttribute('data-to');
+    import(window.FE_ROOT + 'js/book-styles.js').then(function (m) { m.applyBookStyles(); }).catch(function () {});
+  </script>
+</body>
+</html>

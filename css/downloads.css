@@ -1,0 +1,111 @@
+/* Flat Earth website: the Downloads page (downloads/index.html). Loaded after site.css, which supplies the
+   paper, the masthead, the crumpled .panel frame, .btn and the --tex-* textures painted by js/book-styles.js. */
+
+.downloads { max-width: 1100px; margin: 24px auto 8px; }
+
+.dl-title {
+  font-size: 40px; font-weight: normal; letter-spacing: 0.04em; margin: 0 0 8px;
+  display: inline-block; padding-bottom: 6px; background: var(--tex-underline) bottom / 100% 12px no-repeat;
+}
+.dl-lede { margin: 0 0 6px; max-width: 46em; font-size: 18px; }
+
+.dl-jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0 0 22px; }
+.dl-jump .btn { text-decoration: none; display: inline-block; padding: 2px 10px; font-size: 17px; }
+
+/* ---------- the two sections ---------- */
+.dl-section { padding: 6px 12px 14px; margin: 0 0 var(--gap); scroll-margin-top: 12px; }
+.dl-h2 {
+  display: inline-block; margin: 0 0 8px; padding: 4px 14px 0; font-size: 30px; font-weight: normal; letter-spacing: 0.06em;
+  background: var(--tex-blue) center / 100% 100% no-repeat;
+}
+.dl-intro { margin: 2px 0 20px; max-width: 48em; }
+.dl-h3 { margin: 0 0 2px; font-size: 22px; font-weight: normal; letter-spacing: 0.05em; }
+.dl-h4 {
+  margin: 0 0 8px; font-size: 17px; font-weight: normal; letter-spacing: 0.08em;
+  display: inline-block; padding-bottom: 3px; background: var(--tex-underline) bottom / 100% 8px no-repeat;
+}
+.dl-tag { margin: 0 0 8px; font-size: 13px; letter-spacing: 0.1em; color: var(--ink-soft); }
+.dl-section p { margin-top: 0; }
+
+/* ---------- picture frames: a hand-drawn single line, like the buttons ---------- */
+.dl-pic { display: block; border: 10px solid transparent; border-image: var(--tex-button) 20 / 10px stretch; margin: 0 0 12px; }
+.dl-pic img { display: block; width: 100%; height: auto; }
+a.dl-pic:hover, a.dl-pic:focus-visible { background: var(--tex-blue-soft) center / 100% 100% no-repeat; outline: none; }
+a.dl-pic:hover img, a.dl-pic:focus-visible img { opacity: 0.94; }
+
+/* ---------- FOLD A GLOBE: two cards ---------- */
+.dl-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px var(--gap); }
+.dl-card { min-width: 0; }
+
+/* ---------- download links: big, easy to tap, with the orange place dot ---------- */
+.dl-list { list-style: none; margin: 4px 0 16px; padding: 0; }
+.dl-list li { margin: 0; }
+.dl-link {
+  display: grid; grid-template-columns: 22px 1fr; column-gap: 10px; align-items: baseline;
+  min-height: 44px; padding: 8px 6px 10px; color: var(--ink); text-decoration: none;
+  background: var(--tex-underline) bottom / 100% 8px no-repeat;
+}
+.dl-link::before {
+  content: ''; grid-row: 1 / span 3; align-self: start; width: 20px; height: 20px; margin-top: 2px;
+  background: var(--tex-dot) center / contain no-repeat;
+}
+.dl-name { font-size: 18px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.dl-meta { grid-column: 2; font-size: 14px; color: var(--ink-soft); }
+.dl-link:hover, .dl-link:focus-visible {
+  background: var(--tex-blue-soft) center / 100% 100% no-repeat, var(--tex-underline) bottom / 100% 8px no-repeat; outline: none;
+}
+.dl-link:focus-visible { box-shadow: 0 0 0 2px var(--ink); }
+.dl-link:hover .dl-name { color: var(--ink); text-decoration-color: var(--orange); }
+
+/* ---------- steps ---------- */
+.dl-steps {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 10px var(--gap);
+  margin-top: 22px; padding-top: 18px; background: var(--tex-underline) top / 100% 10px no-repeat;
+}
+.dl-steps-3 { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) minmax(0, 1.1fr); }
+.dl-bullets, .dl-numbers { margin: 0 0 12px; padding: 0; list-style: none; }
+.dl-bullets li, .dl-numbers li { position: relative; padding-left: 28px; margin: 0 0 8px; }
+.dl-bullets li::before {
+  content: ''; position: absolute; left: 4px; top: 6px; width: 14px; height: 14px;
+  background: var(--tex-dot) center / contain no-repeat;
+}
+.dl-numbers { counter-reset: step; }
+.dl-numbers li { counter-increment: step; }
+.dl-numbers li::before { content: counter(step); position: absolute; left: 4px; top: 0; color: #c0392b; font-size: 18px; line-height: 1.3; }
+.dl-tip { font-size: 15px; color: var(--ink-soft); margin: 4px 0 0; }
+
+/* ---------- MAKE A STAR WHEEL ---------- */
+.dl-star { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px var(--gap); align-items: start; }
+.dl-figure { margin: 0; }
+.dl-figure figcaption { font-size: 15px; color: var(--ink-soft); }
+.dl-size-note { white-space: nowrap; }
+.dl-star-files .dl-h3 { margin-top: 2px; }
+.dl-pack { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: start; margin: 6px 0 0; }
+.dl-pack p { margin: 0; }
+.dl-pack-pic { display: block; width: 100%; height: auto; margin-top: 4px; box-shadow: 0 1px 0 rgba(29, 27, 30, 0.25), 0 4px 10px rgba(29, 27, 30, 0.12); transform: rotate(-1.5deg); }
+
+/* ---------- narrower screens ---------- */
+@media (max-width: 900px) {
+  .dl-star { grid-template-columns: 1fr; }
+  .dl-figure { max-width: 560px; }
+  .dl-steps-3 { grid-template-columns: 1fr 1fr; }
+  .dl-steps-3 > :first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 720px) {
+  .dl-cards, .dl-steps, .dl-steps-3 { grid-template-columns: 1fr; }
+  .dl-title { font-size: 34px; }
+  .dl-h2 { font-size: 25px; }
+  .dl-section { padding: 2px 2px 8px; }
+  .downloads { margin-top: 16px; }
+}
+@media (max-width: 420px) {
+  .dl-pack { grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
+  .dl-lede { font-size: 17px; }
+  .dl-h2 { font-size: 22px; padding: 4px 10px 0; }
+}
+@media print {
+  .dl-jump, .topnav { display: none; }
+}
+.dl-figure figcaption a { color: var(--ink); display: inline-block; padding: 11px 2px; margin: -11px 0; } /* (a 44 px tap target inside the line) */
+.dl-figure figcaption a:hover, .dl-figure figcaption a:focus-visible { color: var(--orange); }
+.dl-size { white-space: nowrap; }
